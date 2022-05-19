@@ -1,0 +1,41 @@
+#load "core/std"
+#load "./module"
+
+use core
+use cbindgen
+
+main :: () {
+    path := module_path(#file);
+
+    c_file_path := string.concat(path, "openal.c");
+
+    result := generate_c_binding(.{
+        output_file = c_file_path,
+        foreign_block = openal.foreign_block,
+
+        cast_map = .[
+            .{ openal.ALCdevice, "ALCdevice *" },
+            .{ openal.ALCcontext, "ALCcontext *" },
+        ],
+
+        preamble = .[
+"""
+#include <AL/al.h>
+#include <AL/alc.h>
+"""
+        ],
+
+        custom_implementations = .[],
+    });
+
+    if !result {
+        os.exit(1);
+    }
+
+    result = compile_c_file(c_file_path, string.concat(path, "onyx_openal"));
+    if !result {
+        os.exit(1);
+    }
+
+    os.remove_file(c_file_path);
+}
