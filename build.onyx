@@ -32,7 +32,7 @@ main :: () {
         os.exit(1);
     }
 
-    result = compile_c_file(c_file_path, string.concat(path, "onyx_openal"));
+    result = compile_c_file(c_file_path, string.concat(path, "onyx_openal"), libraries=.["openal"]);
     if !result {
         os.exit(1);
     }
