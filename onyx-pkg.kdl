@@ -1,0 +1,18 @@
+package {
+    name "openal" 
+    author "Brendan Hansen" 
+    url "git://onyxlang.io/repo/openal" 
+    description "OpenAL 1.1 bindings for Onyx" 
+    version "0.0.4" 
+}
+
+config {
+    dependency_source_path "./lib" 
+    dependency_binary_path "./bin" 
+}
+
+native {
+    library "onyx_openal" 
+    build "onyx run build --generate-foreign-info" 
+}
+
