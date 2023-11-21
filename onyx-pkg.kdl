@@ -3,7 +3,7 @@ package {
     author "Brendan Hansen" 
     url "git://onyxlang.io/repo/openal" 
     description "OpenAL 1.1 bindings for Onyx" 
-    version "0.0.4" 
+    version "0.0.5" 
 }
 
 config {
